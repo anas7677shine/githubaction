@@ -34,7 +34,6 @@ jobs:
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
           git pull
-          pip install -r requirements.txt
           python hello_world.py
 
 
