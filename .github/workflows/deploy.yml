@@ -24,7 +24,7 @@ jobs:
 
     - name: Test
       run: |
-        python hello_world.py
+        python python.py
 
     - name: Deploy to EC2
       uses: appleboy/ssh-action@master
