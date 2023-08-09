@@ -31,6 +31,6 @@ jobs:
     - name: Deploy to EC2
       run: |
         git pull
-        python your_script.py
+        python python.py
 
 
