@@ -21,7 +21,6 @@ jobs:
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
 
     - name: Run Commands on EC2
       uses: appleboy/ssh-action@master
@@ -30,8 +29,7 @@ jobs:
         username: ${{ secrets.EC2_USERNAME }}
         key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
         script: |
-          cd /path/to/your/project
+          cd /jyoti
           git pull origin main
           python python.py
-
 
