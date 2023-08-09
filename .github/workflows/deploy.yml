@@ -30,6 +30,7 @@ jobs:
 
     - name: Deploy to EC2
       run: |
+        cd jyoti
         git pull origin main
         python python.py
 
