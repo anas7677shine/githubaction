@@ -9,6 +9,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+  strategy:
+      matrix:
+        python-version: [3.8, 3.9]
+
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
@@ -31,5 +35,5 @@ jobs:
         script: |
           cd /jyoti
           git pull origin main
-          python python.py
+          python -m pytest python.py
 
