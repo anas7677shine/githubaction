@@ -1,39 +1,28 @@
-name: Run Commands on EC2
+name: My First GitHub Actions
 
-on:
-  push:
-    branches:
-      - main
+on: [push]
 
 jobs:
-  deploy:
-    runs-on: self-hosted
+  build:
+    runs-on: ubuntu-latest
 
-  strategy:
+    strategy:
       matrix:
         python-version: [3.8, 3.9]
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-
+    - uses: actions/checkout@v3
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.x'
+        python-version: ${{ matrix.python-version }}
 
-    - name: Install Dependencies
+    - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        pip install pytest
 
-    - name: Run Commands on EC2
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ${{ secrets.EC2_USERNAME }}
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        script: |
-          cd /jyoti
-          git pull origin main
-          python -m pytest python.py
-
+    - name: Run tests
+      run: |
+        cd src
+        python -m pytest python.py
